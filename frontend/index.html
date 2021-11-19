@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo app</title>
+    <link rel="stylesheet" href="./src/assets/global.css">
+</head>
+
+<body ng-app="todoApp">
+    <!-- Navbar -->
+    <nav class="title-container">
+        <h2 class="title">
+            Todo App
+        </h2>
+        <span class="subtitle">In less than one hour</span>
+    </nav>
+
+    <!-- Main -->
+    <div ng-controller="MainController" ng-init="findAll()">
+        <h4>Add todo</h4>
+        <hr>
+        <form>
+            <p>
+                <label>Todo name:</label>
+                <input type="text" ng-model="todo.name" placeholder="name">
+            </p>
+            <p>
+                <label>Todo description:</label>
+                <input type="text" ng-model="todo.desc" placeholder="description">
+            </p>
+            <button ng-click="create()">Create</button>
+            <button type="reset">Clear</button>
+        </form>
+        <h4>My todos</h4>
+        <hr>
+        <table>
+            <tr>
+                <th>Todo</th>
+                <th>Description</th>
+                <th>Status</th>
+            </tr>
+            <tr ng-repeat="todo in todos.data">
+                <td>{{todo.name}}</td>
+                <td>{{todo.desc}}</td>
+                <td ng-if="todo.name && todo.desc">
+                    <input type="checkbox" ng-click="remove(todo._id)" ng-if="!todo.complete">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="./node_modules/angular/angular.min.js"></script>
+    <script src="./src/modules/app.module.js"></script>
+    <script src="./src/controllers/main.controller.js"></script>
+    <script src="./src/factories/main.factory.js"></script>
+</body>
+
+</html>
